@@ -16,7 +16,7 @@ services:
       - myapp
   web:
     image: nextcloud:22.2.3-apache
-    env_file: ./.env.nextcloud
+    env_file: ./.env.web
     volumes:
       - web:/var/www/html/
     networks:
