@@ -1,0 +1,26 @@
+version: "3.9"
+networks:
+  myapp:
+    external: true
+volumes:
+  conf: {}
+  root: {}
+  logs: {}
+  letsencrypt: {}
+services:
+  web:
+    image: ngix
+    volumes:
+       - root:/usr/share/nginx
+       - conf:/etc/nginx/conf.d
+       - logs:/var/log/nginx
+       - letsencrypt:/etc/letsencrypt
+         # deploy:
+            # replicas: 2
+      # placement:
+                # constraints: [node.role == manager]
+    ports:
+       - 80:80
+       - 443:443
+    networks:
+      - myapp
