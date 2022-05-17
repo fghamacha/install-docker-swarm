@@ -3,7 +3,6 @@ networks:
   myapp:
     external: true
 volumes:
-  redis: {}
   db: {}
   web: {}
 services:
