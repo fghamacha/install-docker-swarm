@@ -1,0 +1,25 @@
+version: "3.9"
+networks:
+  myapp:
+    external: true
+volumes:
+  redis: {}
+  db: {}
+  web: {}
+services:
+  db:
+    image: mariadb:10.5.13-focal
+    env_file: ./.env.mariadb
+    volumes:
+      - db:/var/lib/mysql/
+    networks:
+      - myapp
+  web:
+    image: nextcloud:22.2.3-apache
+    env_file: ./.env.nextcloud
+    volumes:
+      - web:/var/www/html/
+    networks:
+      - myapp
+    depends_on:
+      - db
